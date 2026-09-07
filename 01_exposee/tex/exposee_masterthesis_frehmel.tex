@@ -1,0 +1,135 @@
+\documentclass[proposal,palatino,english]{AIGpaper}
+% Please read the README.md file for additional information on the parameters and overall usage of AIGpaper
+
+%%%% Package Imports %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}					           % enhanced support for graphics
+\usepackage{amsfonts}					           % math fonts
+\usepackage{amssymb}					           % math symbols
+\usepackage{amsmath}					           % overall enhancements to math environment
+\usepackage{amsthm}                                % for theorems and other environments
+
+%%%% optional packages
+\usepackage{url}                            % for linking external urls
+\usepackage{booktabs}                      % for nicer tables 
+\usepackage[hidelinks]{hyperref}           % for automatic hyperlinks
+\usepackage{tikz}                          % creating graphs and other structures
+\usepackage{todonotes} % for TODOs
+\usepackage{csquotes} 
+
+
+%%%% Enviroments for theorems, propositions, definitions, ....
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{observation}{Observation}
+\newtheorem*{observation*}{Observation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% Author and Title Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Sebastian Frehmel}
+
+\title{Real-Time, Difference-Based Updates\\ to 3D Gaussian Splatting Scenes\\ in Fixed Multi-Camera Setups}
+%Real-Time Updates to 3D Gaussian Splatting Scenes in Fixed Multi-Camera Setups Using a Difference-Based Approach
+%Real-Time 3D Gaussian Splatting Updates in Fixed Multi-Camera Setups Using a Difference-Based Approach
+%Updating 3D Gaussian Splatting Scenes in Real-Time Using a Difference-Based Approach
+%Updating 3D Gaussian Splatting Scenes in Fixed Multi-Camera Setups in Real-Time Using a Difference-Based Approach
+
+%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\englishabstract{3D Gaussian Splatting (3DGS) comes in two widely recognized flavors: either static pre-trained scenes (regular 3DGS) or moving, but still pre-trained scenes (sometimes called 4DGS). A third flavor, real-time updates to existing static scenes from e.g. live-feed cameras, has not yet been researched to a deeper extent, mostly due to large hardware requirements and existing algorithms reaching their limits. We propose an approach that allows updating 3DGS scenes in real-time by only using the \textit{differences} between two subsequent input images of the same source camera, significantly decreasing hardware requirements. For this to be meaningful, we require the scene to be captured in a fixed multi-camera setup.}
+
+
+\begin{document}
+
+\maketitle % prints title and author information, as well as the abstract 
+
+
+% ===================== Beginning of the actual text section =====================
+
+\section{The Student}
+First, some words about myself. I am 43, live in Berlin with my family and I studied Diplom-Informatik at Karlsruhe Institute of Technology, graduating in 2010. After that I spent around twelve years working as a software developer, mostly on the data and backend sides of projects. I decided to return to enrolling at a university and studying Data Science mostly because of two long-term diseases that prevented me from performing my previous jobs (including a PhD) but also from the felt need to get up to speed on more recent topics in Computer Science. Even though I never focused on Computer Graphics during my Diplom studies, computer visuals have always interested me. I was quite happy to learn about 3D Gaussian Splatting in late 2025 which I see as a very fitting topic at the intersection of advanced Computer Science and Data Science/ML/AI for someone with software development experience seeking a challenge. The idea of the thesis topic came from an older mind game of mine, which saw true 3D video broadcasts of live events become possible.
+%If this thesis shows that my proposed approach is possible, I can think of turning the concepts into a business idea.
+
+\section{Introduction}
+\todo[inline]{Write here an introduction for the topic of your planned thesis. Describe why is considering/investigating the topics of the thesis important.}
+
+\section{Background}
+\todo[inline]{In this section, describe the background for the topic of your thesis. Generally, make use of the features of documents (and LaTeX) by providing figures, tables, referring, and other abilities to structure the text.}
+
+Für weitere Informationen zum Darstellen von Argumentationsgraphen, siehe\footnote{\tiny\ttfamily\url{https://github.com/aig-hagen/tikz_argumentation/blob/main/argumentation-doc.pdf}}.
+
+\begin{table*}[t]
+\begin{center}
+\begin{tabular}{lll}
+\hline
+1&2&3\\
+4&5&6\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Eine Tabelle.} \label{tab:t1}
+\end{table*}
+
+
+\subsection{Encoding Test}
+Städte, Länder, Flüsse
+
+
+\section{Problem Description}
+\todo[inline,caption={}]{Describe what the premises and problems in the thesis are dealing with. 
+	Generally, this is often some lack of knowledge or lack of means that is planned to be resolved. For instance, non-existing insights in a certain domain or no tools/algorithms/implementations for further investigations.
+}
+For propositions and definitions please use appropriate environments.
+Here is an example for a definition.
+
+\begin{definition}
+	A deterministic finite automaton (DFA) is a tuple \( A=(Q,\Sigma,\delta,q_0,F) \) consisting of
+	\begin{itemize}
+		\item a finite set of states \( Q \),
+		\item a finite alphabet \( \Sigma \),
+		\item a transition function \( \delta:Q\times\Sigma\to Q \), 
+		\item a start state \( q_0 \in Q \), and
+		\item a set of accepting states \( F \subseteq Q \).
+	\end{itemize}
+\end{definition}
+
+Here is an example for a proposition.
+
+\begin{proposition}
+	The problem of deciding whether a Turing machine halts for an input string is undecidable.
+\end{proposition}
+
+Examples can be made with the example environment.
+
+\begin{example}
+	Content of the example environment.
+\end{example}
+
+
+\section{Goals of the thesis}
+\todo[inline,caption={}]{In this section, describe what are the plans and goals for the thesis. Contributions are existing in many forms. Generally, as time for thesis is quite short, we recommend to be conservative with settings goals.
+	Contributions which are part of \textbf{every} thesis are:
+	\begin{itemize}
+		\item Literature research and description of the background in a proper and concise way
+	\end{itemize}
+Here are some examples for other types of contributions that can be also goals of a thesis:
+\begin{itemize}
+	\item Identification and documentation of problems
+	\item Illustration of definitions, theorems and algorithms
+	\item Development, identification and presentation of examples
+	\item Evaluations in different forms (empirical and theoretical)
+	\item Implementations
+	\item Development or investigations of concepts
+\end{itemize}
+}
+
+% References
+\addreferences
+
+
+\end{document}
