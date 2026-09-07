@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  dev-env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: master_thesis
+    restart: unless-stopped
+    volumes:
+      # Mount the local directory to /workspace in the container
+      - .:/workspace:cached
+      # Mount Git Identity
+      - ~/.gitconfig:/tmp/.gitconfig_host:ro
+      # Mount the SSH folder to a TEMP path (Staging)
+      - ~/.ssh:/tmp/.ssh_host:ro
+    # Keep the container running in the background for the devcontainer to attach
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

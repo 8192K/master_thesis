@@ -1,0 +1,41 @@
+{
+  "name": "Master Thesis",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev-env",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "latex-workshop.view.pdf.viewer": "tab",
+        "latex-workshop.latex.autoBuild.run": "onSave",
+        "python.defaultInterpreterPath": "/home/sebastian/.local/share/mamba/envs/dev-env/bin/python3.14",
+        "editor.inlineSuggest.enabled": false,
+        "editor.inlineSuggest.minShowDelay": 1000
+      },
+      "extensions": [
+        "James-Yu.latex-workshop",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.vscode-pylint",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        "mads-hartmann.bash-ide-vscode",
+        "ms-azuretools.vscode-containers",
+        "ms-vscode.cpptools",
+        "waderyan.gitblame",
+        "mhutchie.git-graph",
+        "donjayamanne.githistory",
+        "shaharkazaz.git-merger",
+        "arturock.gitstash",
+        "codezombiech.gitignore",
+        "christian-kohler.path-intellisense",
+        "esbenp.prettier-vscode",
+        "njqdev.vscode-python-typehint",
+        "ms-python.debugpy",
+        "kevinrose.vsc-python-indent",
+        "redhat.vscode-yaml",
+        "ltex-plus.vscode-ltex-plus"
+      ]
+    }
+  }
+}
