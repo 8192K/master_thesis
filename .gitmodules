@@ -1,3 +1,3 @@
 [submodule "01_exposee/seminar"]
-	path = 01_exposee/seminar
+	path = 01_proposal/seminar
 	url = git@github.com:8192K/master_seminar_3dgs.git

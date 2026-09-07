@@ -26,7 +26,7 @@ fi
 
 git config --global --add safe.directory '*'
 
-git -C /workspace/01_exposee/seminar/ remote set-url --push origin DISABLED
+git -C /workspace/01_proposal/seminar/ remote set-url --push origin DISABLED
 
 # 2. Start the main command (Jupyter)
 exec "$@"

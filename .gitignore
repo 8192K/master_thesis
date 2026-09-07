@@ -331,6 +331,6 @@ TSWLatexianTemp*
 #*Notes.bib
 
 
-01_exposee/tex/*.pdf
+01_proposal/tex/*.pdf
 02_thesis/src/tex/*.pdf
 03_presentation/tex/*.pdf
