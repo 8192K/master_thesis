@@ -41,7 +41,7 @@
 
 %%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\englishabstract{3D Gaussian Splatting (3DGS) comes in two widely recognized flavors: either static pre-trained scenes (regular 3DGS) or moving, but still pre-trained scenes (sometimes called 4DGS). A third flavor, real-time updates to existing static scenes from e.g. live-feed cameras, has not yet been researched to a deeper extent, mostly due to large hardware requirements and existing algorithms reaching their limits. We propose an approach that allows updating 3DGS scenes in real-time by only using the \textit{differences} between two subsequent input images of the same source camera, significantly decreasing hardware requirements. For this to be meaningful, we require the scene to be captured in a fixed multi-camera setup.}
+\englishabstract{3D Gaussian Splatting (3DGS) comes in two major varieties: either static pre-trained scenes (regular 3DGS) or moving, but still pre-trained scenes (dynamic scene reconstruction/\enquote{4DGS}). A third variety, real-time updates to existing static scenes from e.g. live-feed cameras, has not yet been researched to a deeper extent, mostly due to large hardware requirements and algorithms reaching their limits. We propose a novel approach that intends to allow updating 3DGS scenes in real-time by only using the \textit{differences} between two subsequent input images of the same source camera, creating incremental difference-only 3D scenes from this input and combining them with the existing 3D scene. For this method to be meaningful, we require the scene to be captured in a fixed multi-camera setup.}
 
 
 \begin{document}
@@ -52,28 +52,62 @@
 % ===================== Beginning of the actual text section =====================
 
 \section{The Student}
-First, some words about myself. I am 43, live in Berlin with my family and I studied Diplom-Informatik at Karlsruhe Institute of Technology, graduating in 2010. After that I spent around twelve years working as a software developer, mostly on the data and backend sides of projects. I decided to return to enrolling at a university and studying Data Science mostly because of two long-term diseases that prevented me from performing my previous jobs (including a PhD) but also from the felt need to get up to speed on more recent topics in Computer Science. Even though I never focused on Computer Graphics during my Diplom studies, computer visuals have always interested me. I was quite happy to learn about 3D Gaussian Splatting in late 2025 which I see as a very fitting topic at the intersection of advanced Computer Science and Data Science/ML/AI for someone with software development experience seeking a challenge. The idea of the thesis topic came from an older mind game of mine, which saw true 3D video broadcasts of live events become possible.
+I am 43, from Berlin and I studied Diplom-Informatik at Karlsruhe Institute of Technology, graduating in 2010. After that I spent around twelve years working as a software developer, mostly on the data and backend sides of projects. I decided to return to enrolling at a university and studying Data Science mostly because of two long-term diseases that prevented me from performing my previous jobs (including a PhD program) but also from the felt need to get up to speed on more recent topics in Computer Science. As an experienced software developer with a Diplom in CS, I focussed heavily on all modules offered by AIG as they offered the most added value compared to \enquote{regular} CS modules. Keen on computer visuals, I was happy to learn about 3D Gaussian Splatting (3DGS) in late 2025 and have since tried to focus on this area as a thesis topic. 3DGS offers the challenge I seek at the intersection of advanced Computer Science and ML/AI. The idea of the thesis topic stems from an older thought experiment of mine, which saw true 3D video broadcasts of live events become possible.\\
+I attended the seminar \enquote{Artificial Intelligence - Visual Computing} in the 2026 summer term, actually proposing 3DGS as a seminar topic early on. The seminar paper I then wrote on 3DGS forms an important knowledge base of this proposal and the proposed master thesis. Without the seminar paper, such a master thesis would probably not have been feasible due to time constraints.
 %If this thesis shows that my proposed approach is possible, I can think of turning the concepts into a business idea.
 
 \section{Introduction}
+\subsection{Brief Overview}
+3DGS is a young technology in the field of 3D Reconstruction which is itself part of the wider Computer Graphics field. It was first published by Kerbl et al. at INRIA in France in 2023 \cite{kerbl3DGaussianSplatting2023} and has since experienced wide adoption and critical acclaim across domains, having been cited more than 10,000 times \cite{semanticScholarKerbl,researchGateKerbl}. 3DGS solved issues previous technologies in 3D Reconstruction had, such as Neural Radiance Fields (NeRFs), as for example finally being able to render 1080p resolution scenes in real-time, making full use of modern GPGPUs, offering editability of the scene and all that at very reasonable training times. 3DGS uses 3D Gaussians as the base primitive, a previously existing data structure which can be described as ellipsoid fuzzy blobs that use a multi-dimensional normal distribution for their opacity, being most opaque at the center and rapidly losing opacity towards the edges. Kerbl et al., among other achievements, made 3D Gaussians differentiable so they can be used in standard backpropagation with gradient descent. This makes 3DGS an explicit radiance field representation without neural networks. My seminar paper covers the base concept and algorithm in much more detail.
+
+\subsection{3D Gaussian Splatting Algorithm}
+Regular 3DGS takes 2D input images and learns the pictured 3D scene from them. The training phase can run for 5-20 minutes, depending on scene size but already good results are available within seconds after the start of training. A large outdoor 3D scene can have millions of 3D Gaussians and hundreds of input images. The input images are first converted into a point cloud and camera matrices (camera orientation in space etc.) and the points of the point cloud become the origins for the initial 3D Gaussians before training. It is important to know that even initialising 3D Gaussians randomly still converges, but takes longer to train. 
+
+\subsection{Dynamic Scence Reconstruction Algorithms}
+Dynamic scene reconstruction (4DGS) learns a scene for each frame of videos that are being recorded from fixed or moving locations. For a moving camera location, camera matrices have to be calculated for each frame while it has to be done only once for a fixed camera location. Training the initial scene is identical to regular 3DGS, but subsequent frames can rely on the scene geometry from the previous frame, making training a lot faster as 3D Gaussians are already in the vicinity, with similar shape and color of the next frame's content. It can still not be done in real-time, though, as the input imagery is still full 2D images and the full 3D scene is being considered for training. The difference of the 3D scene between frames can be encoded into so-called \enquote{deformation fields} which allow transforming 3D Gaussians over time according to the field. The other option is to encode the time component directly into the 3D Gaussian data structure, effectively transforming them into 4D Gaussians. This means that 4DGS scenes can only be learned frame by frame, encoded and then later replayed and explored. There is no real-time component.
+
+\subsection{Overview of this Proposal}
+So this proposal is essentially about improving 4DGS to work under real-time constraints. This means we have a static 3D scene that is first being learned using the unmodified, regular 3DGS algorithm\footnote{Which iteration of the algorithm has still to be decided}. Here we can see why it is important to work with fixed multi-camera setups in real-time settings. With fixed cameras, the camera's field of view can't change, the camera matrix is always the same and it's thus simple to create differences between two subsequent captured images.
+
+For the real-time component we can deduce that we get 33 milliseconds per frame to advance the scene if we consider 30 frames per second as smooth enough. For a decently sized static initial scene that takes 5 minutes to train, each iteration of the training algorithm (there are usually around 30,000 iterations) takes 10ms. So the goal is to fill the available 33ms with efficient (GPU) logic to fully advance the scene by one frame. Seeing that the full scene takes 10ms for one training iteration the consequence is clear: what is being considered for the real-time calculation has to be much less than the full scene in order to work at all. However, in 33ms, a modern Nvidia consumer GPU like the GeForce 5090 can perform $3.45$ \textit{trillion} FP16 operations fully in parallel while datacenter GPUs like the Nvidia B200 can even reach 74.5 trillion operations (this is the theoretical maximum, 40-60\% of this are usually considered \enquote{good}).
+
+This is where the novel approach steps in. For the dynamic part of the 3D scene (the one after training the initial, static 3D scene) I propose to only use the differences between subsequent captured images of each camera to contribute to the scene. Fixed cameras will only ever see the same section of the scene, allowing only the changes (the \enquote{diff}) in the scene to propagate into the novel algorithm.
+
+%We also store the previous diff and as a first step, those two diffs are compared and similar/same pixes are mapped onto each other.
+What the 3DGS algorithm does out of the box is map pixels to 3D Gaussians (1:n). So when we have a pixel, we know which 3D Gaussians will be affected. We mark all affected 3D Gaussians as \textit{active} and separate them from the full scene (+ some neighboring 3D Gaussians as padding
+% and 3D Gaussians in the direction the pixel was moving
+). Then the centerpiece of the novel algorithm iterates over the diff-based input images to create a small, possibly tiny, new 3D scene, which will generate quickly as the active 3D Gaussians represent shapes and positions very close to the ones in the new frames. This small diff-based 3D scene is then inserted back into the full scene. As we only touched affected 3D Gaussians, this should not result in gaps etc.
+
+New geometry appearing where there was none in the diff before is most likely very small in the first frame it appears in, so it can just be reconstructed directly.
+
+Geometry being removed/leaving the scene will be handled in the regular way as the pixel color will then show the color behind the geometry that was removed. This geometry will have been known before and the algorithm should only remove the 3D Gaussians that were in front of the one that provided the color behind.
+
+RLE?
+
 \todo[inline]{Write here an introduction for the topic of your planned thesis. Describe why is considering/investigating the topics of the thesis important.}
 
 \section{Background}
 \todo[inline]{In this section, describe the background for the topic of your thesis. Generally, make use of the features of documents (and LaTeX) by providing figures, tables, referring, and other abilities to structure the text.}
 
+20 minutes = 1200000 ms, divided by 30000 iterations = 40ms per iteration
+
+5 minutes = 10ms per iteration
+
+Look into SLAM applications
+
 Für weitere Informationen zum Darstellen von Argumentationsgraphen, siehe\footnote{\tiny\ttfamily\url{https://github.com/aig-hagen/tikz_argumentation/blob/main/argumentation-doc.pdf}}.
 
-\begin{table*}[t]
-\begin{center}
-\begin{tabular}{lll}
-\hline
-1&2&3\\
-4&5&6\\
-\hline
-\end{tabular}
-\end{center}
-\caption{Eine Tabelle.} \label{tab:t1}
-\end{table*}
+% \begin{table*}[t]
+% \begin{center}
+% \begin{tabular}{lll}
+% \hline
+% 1&2&3\\
+% 4&5&6\\
+% \hline
+% \end{tabular}
+% \end{center}
+% \caption{Eine Tabelle.} \label{tab:t1}
+% \end{table*}
 
 
 \subsection{Encoding Test}
@@ -128,8 +162,9 @@ Here are some examples for other types of contributions that can be also goals o
 \end{itemize}
 }
 
-% References
-\addreferences
+\newpage
 
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}
