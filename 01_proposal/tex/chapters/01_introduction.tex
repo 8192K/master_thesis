@@ -1,0 +1,26 @@
+% ===================== Beginning of the actual text section =====================
+\section{Introduction}
+
+%\todo[inline]{Write here an introduction for the topic of your planned thesis. Describe why is considering/investigating the topics of the thesis important.}
+
+3D Gaussian Splatting (3DGS), conceived in 2023, is a young AI technology in the field of 3D reconstruction which is itself part of the wider field of Computer Graphics. Technologies in the field of 3D reconstruction create a 3D scene from a set of 2D input imagery.
+They consist of a reconstruction part and a part rendering new views from the reconstructed scene (novel-view synthesis).
+
+Before 3DGS, learning a 3D scene was done with large neural networks which learned an implicit radiance field representation\footnote{An implicit radiance field is a continuous function that maps coordinates/points and a viewing angle to a color and opacity. An explicit radiance field limits the amount of points.} (Neural Radiance Fields, NeRFs). 
+Training one scene usually took several days and novel-view synthesis reached very low numbers of frames per second (FPS) at best. It was not possible to be used for real-time rendering.
+
+3DGS does not use neural networks as it learns an explicit radiance field representation. As its base primitive it makes use of 3D Gaussians, differentiable, ellipsoid fuzzy blobs, which adjust their position, color, shape, and opacity during the training procedure.
+The training procedure works with standard backpropagation via gradient descent. Using these base primitives as well as state-of-the-art utilization of modern GPUs enabled learning 3D scenes much quicker, in the order of minutes, while maintaining or improving NeRF image quality, as well as real-time novel-view synthesis ($\ge30$ FPS) at 1080p resolution. The initial publication led to a massive surge of interest in the field.
+
+Besides reconstructing static scenes as shown, dynamic scene reconstruction describes reconstructing moving/changing scenes from video feeds. A naive approach to having dynamic scenes in 3DGS would be to train a static scene for every frame.
+Even with training times taking only minutes, this would be a lot too slow for most purposes. That is why so-called 4DGS makes use of the fact that the previous scene has geometry very close in space to what the next frame requires and takes the previous geometry as the starting point for a much shorter training phase for the next iteration of the scene.
+While real-time novel-view synthesis remains possible in this scenario, the video imagery has to be captured first, then the dynamic scene has to be learned and stored using various encodings and then finally the scene can be replayed and new views rendered from it while the scene is playing.
+As the scene has to be captured beforehand, this is also called offline dynamic scene reconstruction.
+
+There are only few attempts to achieve online dynamic scene reconstruction as it is framed as being computationally very demanding. Existing work therefore typically constrains the types of geometry allowed in a scene or adds other supporting and constraining methods like neural networks predicting the next frame or anatomic constructs guiding the 3D Gaussians. Unconstrained online dynamic scene reconstruction has not been achieved yet in practise.
+
+This is where the proposed thesis steps in. By using a fixed multi-camera setup rather than a moving one, we can extract much more information from each frame, especially when comparing to the previous frame (the frame delta). 
+This way, we can identify subscenes of the full scene that are dynamic and only train those akin to offline dynamic scene reconstruction. As the amount of 3D Gaussians in the subscene will be significantly less than the full scene and the delta of two consecutive frames is much less than a full frame, this will compute much faster.
+The proposed thesis does not claim to achieve real-time dynamic scene reconstruction, but rather aims to validate and evaluate the proposed online algorithm which can then be developed further in future work.
+
+Showing that there is a viable path for unconstrained online dynamic scene reconstruction is important for the field of 3D reconstruction and 3DGS as a technology as it would enable more subsequent research and transform or create downstream applications.

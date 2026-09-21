@@ -1,0 +1,32 @@
+\section{Goals of the thesis}
+%\todo[inline,caption={}]{In this section, describe what are the plans and goals for the thesis. Contributions are existing in many forms. Generally, as time for thesis is quite short, we recommend to be conservative with settings goals.}
+
+The primary goal is to develop and evaluate the mentioned algorithm which identifies and trains subscenes. The goal is not to have it run in real-time, this seems out of scope for a master thesis. I will implement it in PyTorch based off of existing repositories. I suggest the following rough thesis structure:
+
+\subparagraph{Literature and Introduction} Extensive introduction into 3D Gaussian Splatting. I will use my seminar paper as a base for the introduction. This will be followed by an extensive introduction to dynamic scene reconstruction. As there aren't many papers dealing with multi-camera setups or even online dynamic scene reconstruction (around 10-12 relevant ones), I can introduce each paper, also categorizing them. This section can contain up to 50 pages.
+
+\subparagraph{Problem description/developing the algorithm} Describing the problem the thesis deals with as well as developing the algorithm in detail on a theoretical basis. This section will be around 20 pages.
+
+\subparagraph{Overview of Available Code repositories} A rather short overview of existing 3DGS/\allowbreak 4DGS code repositories, weighing their benefits. In the end, I'll pick one to base the implementation off of. Around 5 pages.
+
+\subparagraph{Simulated Environment for a Fixed Multi-Camera Setup} As I can't have a real-world multi-camera setup, the environment will have to be simulated. For this I will use \textit{Blender} and use generative AI to create a scene that is not too small but neither too big and has some moderate levels of motion while being quite detailed (not too simple geometry). This scene will be used in the implementation and for testing. Around 5 pages to describe the scene and its creation.
+
+\subparagraph{Implementation} The actual code will go into the appendix, but here I will compare the theoretical foundations of the algorithm from the 'Problem description/developing the algorithm' chapter with the implementation details. Around 10 pages.
+
+\subparagraph{Evaluation} Here, the implementation is evaluated against a real-time context. As I already mentioned, the implementation is most likely not going to be real-time, so I will evaluate how close it is coming to real-time running, where obstacles and improvements lie, if there is certain geometry that is harder to use in a subscene etc. The concluding parts, of course, are a discussion about future work and a summary. Around 20 pages.
+
+
+% 	Contributions which are part of \textbf{every} thesis are:
+% 	\begin{itemize}
+% 		\item Literature research and description of the background in a proper and concise way
+% 	\end{itemize}
+% Here are some examples for other types of contributions that can be also goals of a thesis:
+% \begin{itemize}
+% 	\item Identification and documentation of problems
+% 	\item Illustration of definitions, theorems and algorithms
+% 	\item Development, identification and presentation of examples
+% 	\item Evaluations in different forms (empirical and theoretical)
+% 	\item Implementations
+% 	\item Development or investigations of concepts
+% \end{itemize}
+% }
