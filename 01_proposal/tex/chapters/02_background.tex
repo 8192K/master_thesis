@@ -20,29 +20,44 @@ The backward pass adjusts all attributes of a 3D Gaussian (position, opacity, sh
 I attended the AIG seminar \enquote{Artificial Intelligence - Visual Computing} with 3DGS as the topic, covering the base concept and algorithm in much more detail.
 
 \subsection{Dynamic Scene Reconstruction}
-Dynamic scene reconstruction (as in \enquote{reconstructing a dynamic scene}) in general represents reconstruction of 3D scenes that change over time, which means the input is a video feed with a certain frame rate. 
+Dynamic scene reconstruction (as in \enquote{reconstructing a dynamic scene}) in general represents reconstruction of 3D scenes that change over time, which means the input are video feeds with a certain frame rate. 
+
+\subsubsection{Camera Setups for Dynamic Scene Reconstruction}
+\label{ch:camera}
+In general, dynamic scene reconstruction scenarios can be divided into single and multi-camera setups using fixed or mobile cameras. Mobile cameras add much to the general computational load as their position has to be estimated with every frame, which is why using fixed camera setups can help bound the load. This automatically limits the extent of the scene but comes naturally for e.g.\,confined indoor spaces.
+
+Single camera setups can be found in 3DGS solutions to SLAM (Simultaneous Localization and Mapping) in robotics which use mobile cameras and live 3D telepresence with fixed cameras for example (e.g. \cite{SplaTAM, TeleGS}). It is clear that with single cameras much of the environment has to be inferred which poses a very different problem.
+
+%For the proposed thesis a fixed multi-camera setup is used in order to be able to compare consecutive frames in a meaningful way.
+Another option within this differentiation is so-called \textit{event-based 3DGS} (e.g. \cite{event3DGS}) which uses \enquote{event cameras} (dynamic vision sensors) that only record changes in light intensity, without color. State-of-the-art solutions for SLAM or robotics in general use these kind of cameras allowing real-time 3D reconstruction of unconstrained scenes, however, at lower resolutions and without color for internal representations only.
+%he proposed thesis takes a different approach, but solutions in SLAM, especially with event-based 3DGS, could prove to be valuable input, too.
+
+Another option fascilitating dynamic reconstruction are RGB-D cameras, which record depth information alongside color values (e.g. \cite{SplaTAM}). This however works only for small scenes or for short distances as larger scenes require Lidar-based sensors, which have their own restrictions and side-effects.
+
+The proposed thesis makes use of fixed multi-camera setups with regular RGB cameras in order to be able to compare consecutive frames in a meaningful way. As the goal is to achieve online dynamic scene reconstruction, algorithmic details used in event-based SLAM could, however, also prove to be valuable input.
 
 \subsubsection{Offline Dynamic Scene Reconstruction}
-In the context of 3DGS as a technology, dynamic scene reconstruction is also called \enquote{4DGS} (e.g. \cite{yangDeformable3DGaussians2024, wu4DGaussianSplatting2024,yangRealtimePhotorealisticDynamic2024}). Training the initial scene is identical to regular 3DGS, but the following frames can rely on scene geometry from the previous frame, making training a lot faster as 3D Gaussians are already in the vicinity, with similar shape and color of the next frame's content.
-It can still not be done in real-time, though, as the input imagery is still full 2D images and the full 3D scene is being considered for training.
+In the context of 3DGS as a technology, dynamic scene reconstruction is also called \enquote{4DGS} or \enquote{Free Viewpoint Video} (e.g. \cite{yangDeformable3DGaussians2024, wu4DGaussianSplatting2024,yangRealtimePhotorealisticDynamic2024}). Training the initial scene is identical to regular 3DGS, but the following frames can rely on scene geometry from the previous frame, making training a lot faster as 3D Gaussians are already in the vicinity, with similar shape and color of the next frame's content.
+The input imagery is still full 2D images and the full 3D scene is being considered for training.
+
 The difference of the 3D scene between frames can be encoded into/learned by so-called \textit{deformation fields}, small neural networks which allow transforming 3D Gaussians over time according to the field~\cite{wu4DGaussianSplatting2024}. The other option is to encode the time component directly into the 3D Gaussian data structure, effectively transforming them into 4D Gaussians~\cite{yangRealtimePhotorealisticDynamic2024}.
-This means that 4DGS scenes can only be learned from pre-recorded imagery, then encoded and then later replayed and explored with novel-view synthesis.
+This means that 4DGS scenes are learned from pre-recorded imagery, then encoded and then later replayed and explored with novel-view synthesis.
 There is no real-time component during reconstruction\footnote{Novel-view synthesis remains real-time, as with regular 3DGS}, which is why the attribute \enquote{offline} can be assigned to this scenario.
 
+Recent works primarily focus on optimizing compression as a 4DGS scene can become very large quickly \cite{lee2025optimizedminimal4dgaussian} or clustering 3D Gaussians by their motion \cite{NEURIPS2025_b690b88d}. The principle algorithm of using the previous state of the scene as the starting point for the next frame has remained unchanged since inception.
+
 \subsubsection{Online and Real-Time Dynamic Scene Reconstruction}
-Contrary to 4DGS scenes, online dynamic scene reconstruction (also called \enquote{3DGS Live Streaming}, \enquote{Live 3DGS}, or \enquote{3DGS Live Video}) describes concurrent reconstruction and novel-view synthesis, usually after initial regular training of a base 3DGS scene.
+Contrary to 4DGS scenes, online dynamic scene reconstruction (also called \enquote{3DGS Live Streaming}, \enquote{Live 3DGS}, or \enquote{3DGS Live Video}\footnote{In 3DGS research, it seems common for authors to reinvent terminology.}) describes concurrent reconstruction and novel-view synthesis of incoming video frames, usually after initial regular training of a base 3DGS scene.
 Online dynamic scene reconstruction does not have to be real-time, but it can be, which means that real-time dynamic scene reconstruction represents the strictest class in dynamic scene reconstruction.
 
 In both cases, a set of new input imagery is converted into the next iteration of the full 3D scene using various algorithms on the fly. There is no need for deformation fields or 4D Gaussians, even though they have been used in this context to store the dynamic scene for later.
 
+\paragraph{Constrained Solutions} Single-camera setups described in Chapter \ref{ch:camera} naturally have to use some kind of prediction mechanism to show what is behind the primary geometry the camera can capture.
+
+
+\paragraph{Unconstrained Solutions}
+
+Occlusion
+
 Real-time dynamic scene reconstruction has so far not been achieved for unconstrained/\allowbreak arbitrary scenes and has seen some solutions imposing major constraints on the allowed geometry.
 Existing solutions e.g.\,use AI priors (large pre-trained neural networks) to predict the next movement in the scene, limiting what can appear in the scene, or use skeletal models of humans to guide 3D Gaussians.
-
-\subsubsection{Camera Setups for Dynamic Scene Reconstruction}
-In general, dynamic scene reconstruction scenarios can be divided into single or multi-camera setups. Single cameras can be found in 3DGS solutions to SLAM (Simultaneous Localization and Mapping, mobile camera) in robotics and live 3D telepresence (fixed camera) for example. 
-
-For the proposed thesis a fixed multi-camera setup is used in order to be able to compare consecutive frames in a meaningful way. Mobile cameras add much to the general computational load as their position has to be estimated with every frame, which is why using fixed multi-camera setups can help bound the load. This automatically limits the extent of the scene but comes naturally for e.g.\,confined indoor spaces.
-
-Another option within this differentiation is so-called \textit{event-based 3DGS} which uses \enquote{event cameras} that only record changes in light intensity, without color. State-of-the-art solutions for SLAM or robotics in general use these kind of cameras allowing real-time 3D reconstruction of unconstrained scenes, however, at lower resolutions and without color. The proposed thesis takes a different approach, but solutions in SLAM, especially with event-based 3DGS, could prove to be valuable input, too.
-
-Another option fascilitating dynamic reconstruction are RGB-D cameras, which record depth information alongside color values. This however works only for small scenes as larger scenes require Lidar-based sensors, which have their own restrictions and side-effects.
