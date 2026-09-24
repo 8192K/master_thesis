@@ -409,7 +409,7 @@
                     \else
                         \ifproposal%
                             \ifenglish%
-                                Thesis Proposal
+                                Thesis Proposal (now obsolete)
                             \else
                                 Exposé
                             \fi

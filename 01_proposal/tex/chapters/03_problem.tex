@@ -1,10 +1,7 @@
 \section{Problem Description}
-\todo[inline,caption={}]{Describe what the premises and problems in the thesis are dealing with. 
-	Generally, this is often some lack of knowledge or lack of means that is planned to be resolved. For instance, non-existing insights in a certain domain or no tools/algorithms/implementations for further investigations.
-}
-
-
-\subsection{Overview of the Proposed Thesis}
+%\todo[inline,caption={}]{Describe what the premises and problems in the thesis are dealing with. 
+%	Generally, this is often some lack of knowledge or lack of means that is planned to be resolved. For instance, non-existing insights in a certain domain or no tools/algorithms/implementations for further investigations.
+%}
 
 The proposed thesis is about formulating and evaluating a novel approach to online dynamic scene reconstruction via 3DGS that only looks at the subset of 3D Gaussians - the \textit{subscene} - that is being altered in comparison to the previous frame. Such a subscene contains only a fraction of all Gaussians and would therefore be much faster to compute.
 
@@ -12,27 +9,28 @@ In a first step, though, the space covered by the fixed multi-camera setup is tr
 
 The input imagery for a subscene are frame-to-frame pixel changes from the new frame to the previous frame (for each camera). This is explicitly not a difference image, as the input image would contain pixels that did change over two consecutive frames holding their changed RGB value. The rest of the pixels would be encoded as 'unset' and be ignored during subscene reconstruction.
 
-During the forward pass of subscene reconstruction, only the set pixels (the ones not to be ignored) are considered and the loss function only compares the set pixels in rendered and input images before heading into the backward pass. Also in the backward pass, only Gaussians behind set pixels are considered - this is provided by 3DGS out of the box. All other Gaussians would not be touched during gradient descent (\enquote{frozen}).
+During the forward pass of subscene reconstruction, only the set pixels (the ones not to be ignored) are considered and the loss function only compares the set pixels in rendered and input images before heading into the backward pass. Also in the backward pass, only Gaussians behind set pixels are considered - this is provided by 3DGS out of the box. All other Gaussians would not be touched during gradient descent (\enquote{frozen}).\vspace*{1em}
 
 The algorithm is expected to converge very quickly as
 \begin{itemize}
-	\item the existing geometry is close to what the new imagery of a new frame requires.
-	\item new geometry appearing where there was none close by in the scene before is most likely very small in the first frame it appears in, so it can just be reconstructed directly.
+	\item the existing geometry is spatially close to what the new imagery of a new frame requires.
+	%\item new geometry appearing where there was none close by in the scene before is most likely very small in the first frame it appears in, so it can just be reconstructed directly.
+	\item solutions for new geometry entering the scene require spawning new 3D Gaussians at the correct position. This can be achieved by finding the intersection of changed pixels from at least two input images and mapping those to points in 3D space where the Gaussians can be spawned. We would spawn a larger amount of empty Gaussians in this spot and prune the ones that remained empty after each new frame. So there would be some kind of secondary pruning operation after the regular pruning during training of the base scene.
 	\item geometry removed/leaving the scene will be handled in the regular way as the pixel color will then show the color behind the geometry that was removed. This geometry will have been known before and the algorithm should only remove the 3D Gaussians that were in front of the one that provided the color behind.
 \end{itemize}
-This means that the training algorithm for the subscene is essentially the same as with regular 3DGS, \enquote{only} using a mask on pixels and Gaussians to be considered. This process could be sped up if Gaussians contained motion vectors making predicting the Gaussians' next positions even more precise.
+This means that the training algorithm for the subscene is to a large extent identical to regular 3DGS/4DGS, but using a mask on pixels and Gaussians to be considered.
 
-This subscene approach in a fixed multi-camera setup has never been investigated but looks very promising to at least reach a low number of FPS which can then later -- in subsequent work -- be refined to run at real-time speeds (\enquote{First make it work, then make it work fast}). 3DGS in general is a 'hot topic' in academic research and the reason for the subscene approach not having been considered so far in dynamic scene reconstruction can have several reasons: 
+This process could be sped up if Gaussians contained motion vectors making predicting the Gaussians' next positions more precise, reducing the amount of training iterations.
+
+This subscene approach in a fixed multi-camera setup \st{has never been investigated but} looks very promising to at least reach a low number of FPS which can then later -- in subsequent work -- be refined to run at real-time speeds (\enquote{First make it work, then make it work fast}). Refer to Chapter \ref{ch:decogs} for an explanation of the strikethrough segment above.
+
+\paragraph{Other Challenges}
 \begin{itemize}
-	\item dynamic scene reconstruction by itself is a minor area within 3DGS, and generally considered to represent a \enquote{harder} problem compared to regular, static 3DGS.
-	\item single-camera setups, especially for robotics/SLAM are a major focus of research within dynamic scene reconstruction.
-	\item easier grants when there is more AI involved, so using AI priors for predicting scene content for example is a more straightforward path for some researchers.
-	\item multi-camera setups are expensive.
+	\item Implementing such a niche idea cannot be done from scratch. As there are several open source repositories available, some time will have to be spent finding a suitable repository to base the implementation of the proposed thesis off of.
+	\item In order to validate the implementation there are at least two datasets publicly available that have been used in previous papers for validation purposes. Alternatives would mean creating a scene from scratch through software like Blender.
+	\item If there's time left, how could motion vectors be incorporated into the Gaussians?
+	\item Maybe adjusting existing Gaussians and creating new Gaussians has to/should be done in two passes? How to classify existing vs. new geometry?
 \end{itemize}
-
-
-
-%So this proposal is essentially about improving 4DGS to work under real-time constraints. This means we have a static 3D scene that is first being learned using the unmodified, regular 3DGS algorithm\footnote{Which iteration of the algorithm has still to be decided}. Here we can see why it is important to work with fixed multi-camera setups in real-time settings. With fixed cameras, the camera's field of view can't change, the camera matrix is always the same and it's thus simple to create differences between two subsequent captured images.
 
 
 
@@ -55,11 +53,11 @@ This subscene approach in a fixed multi-camera setup has never been investigated
 
 
 
-20 minutes = 1200000 ms, divided by 30000 iterations = 40ms per iteration
+%20 minutes = 1200000 ms, divided by 30000 iterations = 40ms per iteration
 
-5 minutes = 10ms per iteration
+%5 minutes = 10ms per iteration
 
-Look into SLAM applications
+%Look into SLAM applications
 
 %Für weitere Informationen zum Darstellen von Argumentationsgraphen, siehe\footnote{\tiny\ttfamily\url{https://github.com/aig-hagen/tikz_argumentation/blob/main/argumentation-doc.pdf}}.
 

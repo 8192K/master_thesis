@@ -20,7 +20,7 @@ The backward pass adjusts all attributes of a 3D Gaussian (position, opacity, sh
 I attended the AIG seminar \enquote{Artificial Intelligence - Visual Computing} with 3DGS as the topic, covering the base concept and algorithm in much more detail.
 
 \subsection{Dynamic Scene Reconstruction}
-Dynamic scene reconstruction (as in \enquote{reconstructing a dynamic scene}) in general represents reconstruction of 3D scenes that change over time, which means the input are video feeds with a certain frame rate. 
+Dynamic scene reconstruction (as in \enquote{reconstructing a dynamic scene}) in general represents reconstruction of 3D scenes that change over time, which means the inputs are video feeds with a certain frame rate. 
 
 \subsubsection{Camera Setups for Dynamic Scene Reconstruction}
 \label{ch:camera}
@@ -52,12 +52,13 @@ Online dynamic scene reconstruction does not have to be real-time, but it can be
 
 In both cases, a set of new input imagery is converted into the next iteration of the full 3D scene using various algorithms on the fly. There is no need for deformation fields or 4D Gaussians, even though they have been used in this context to store the dynamic scene for later.
 
-\paragraph{Constrained Solutions} Single-camera setups described in Chapter \ref{ch:camera} naturally have to use some kind of prediction mechanism to show what is behind the primary geometry the camera can capture.
+A problem for both, offline and online dynamic scene reconstruction, is occlusion handling. There will inevitably be parts in the scene that have not been captured by any camera as other geometry completely obstructs the views. For these regions, there are essentially three possibilities:
+\begin{itemize}
+\item Leave as is. The most honest approach.
+\item Use AI priors to fill the region with geometry that makes the most sense.
+\item Use statistical solutions to fill the region.
+\end{itemize}
 
+\paragraph{Constrained Solutions} Single-camera setups described in Chapter \ref{ch:camera} naturally have to use some kind of prediction mechanism to show what is behind the primary geometry the camera can capture. A prediction is always a constraint as only those things can be predicted which have been trained beforehand. The same applies to skeletal models (usually of humans) or immutable static backgrounds as for example in \cite{huangEchoesColiseum3D2025}. Using such constraints and large processing pipelines with corresponding GPU hardware makes real-time dynamic scene reconstruction possible - but such scenes are severely limited in content, amongst others.
 
-\paragraph{Unconstrained Solutions}
-
-Occlusion
-
-Real-time dynamic scene reconstruction has so far not been achieved for unconstrained/\allowbreak arbitrary scenes and has seen some solutions imposing major constraints on the allowed geometry.
-Existing solutions e.g.\,use AI priors (large pre-trained neural networks) to predict the next movement in the scene, limiting what can appear in the scene, or use skeletal models of humans to guide 3D Gaussians.
+\paragraph{Unconstrained Solutions} Unconstrained online dynamic scene reconstruction has been possible as early as 2023 \cite{luitenDynamic3DGaussians2024} when 3D Gaussians were modelled as physical particles. Later frameworks like 3DGStream \cite{sun3DGStreamOntheFlyTraining2024} and HiCom \cite{gaoHiCoMHierarchicalCoherent2024} advanced this to achieve a much lower error rate as with \cite{luitenDynamic3DGaussians2024} but training one frame would still take seconds to minutes. This also means that real-time dynamic scene reconstruction has so far not been achieved for unconstrained/\allowbreak arbitrary scenes. This thesis proposal tries to take one step towards reaching this goal.
