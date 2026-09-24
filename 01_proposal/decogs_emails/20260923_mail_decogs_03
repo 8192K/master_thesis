@@ -1,0 +1,227 @@
+Content-Type: multipart/alternative;
+ boundary="------------n6A4AIkrWQ3z4ghp8GY625Ag"
+Message-ID: <8888b16f-4d08-4052-ab44-7ebe4b5693d3@frehmel.de>
+Date: Wed, 23 Sep 2026 16:48:02 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: DecoGS
+To: Idil Sulo <idilsulo@gmail.com>
+References: <06ee9c2b-3c99-4692-b002-b6219eb120a3@frehmel.de>
+ <A1BD981D-584B-4E52-A1AF-517B4C3341D6@gmail.com>
+Content-Language: de-DE
+From: Sebastian Frehmel <sebastian@frehmel.de>
+In-Reply-To: <A1BD981D-584B-4E52-A1AF-517B4C3341D6@gmail.com>
+
+This is a multi-part message in MIME format.
+--------------n6A4AIkrWQ3z4ghp8GY625Ag
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Hi Idil,
+
+thanks for the quick reply. I'd be available on Tuesday or Wednesday
+next week, any time between 8:30 and 15:30.
+
+I have indeed run only the original repo so far, but have investigated
+some newer repositories as well just for fun.Â Are you planning on
+providing one for DecoGS?
+Also, I have access to moderate GPU power here, dual 3060s with 12GB
+VRAM each. But I could get more recent hardware through the university
+or other means.
+
+I'll have a look at the papers you provided, I've heard of QUEEN before.
+
+Looking forward to talking to you next week!
+
+Best,
+Sebastian
+
+
+On 23.09.2026 11:51, Idil Sulo wrote:
+> Hi Sebastian,
+>
+> Thanks for reaching out! I went through your draft, it seems like you
+> were indeed moving towards the same direction.
+>
+> This is the nature of research, and there is a lot of concurrent work.
+> Still, we work on open-ended problems so nothing is yet completely
+> final. There are a few topics following this work already. I could
+> guide you for the thesis for a possible publication if this sounds
+> interesting.
+>
+> Dropping a few papers to discuss further:
+>
+> Queen for dynamic static separation (via residuals here):
+> https://arxiv.org/pdf/2412.04469
+> MoRGS for motion masking: https://arxiv.org/pdf/2603.25042
+> 4DGC for Gaussian compression (to optimize storage costs):
+> https://arxiv.org/pdf/2503.18421
+>
+> Were you able to run anything regarding Gaussian Splatting (perhaps
+> the original repo) so far? Do you have the hardware (GPU) to work on it?
+>
+> I am blocked by another paper submission until the end of this week,
+> but Iâ€™d be happy to follow up with you next week. Let me know about
+> your availability.
+>
+> Best,
+> Idil
+>
+>
+>> On 22. Sep 2026, at 14:37, Sebastian Frehmel <sebastian@frehmel.de>
+>> wrote:
+>>
+>> Hi Idil,
+>>
+>> my name is Sebastian, I am a Master's student in Data Science at
+>> FernuniversitÃ¤t Hagen. It's my second degree after a Diplom in
+>> Computer Science from KIT.
+>>
+>> Earlier today I found the DecoGS paper on arxiv and have now realized
+>> that my entire idea for the Master Thesis that is to start
+>> mid-November has been shattered :-) Yes, I had the exact same idea
+>> and the proposal I wanted to turn in this week for approval by my
+>> professor features virtually the same concepts as DecoGS.
+>> Well, that's science, especially in a field like 3DGS. I'm actually
+>> happy that I had a viable idea and that it would indeed have worked.
+>>
+>> I am writing to send my honest and sincere congratulations! I hope
+>> for a publication somewhere with an impact the paper deserves.
+>>
+>> That said, I'd be very happy if we could have a chat. Maybe there's
+>> material from your research on DecoGS that's suitable to turn into a
+>> Master Thesis as a follow-up or you have other ideas or pointers for
+>> me. I'd appreciate that a lot.
+>>
+>> (I've attached my now obsolete proposal. Chapters 1 (informal
+>> introduction) and 3 (formal problem description, unfinished) should
+>> quickly show you that I was heading in the same direction.)
+>>
+>> Kind regards from Berlin
+>> Sebastian
+>> <proposal_masterthesis_frehmel.pdf>
+>
+--------------n6A4AIkrWQ3z4ghp8GY625Ag
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p>Hi Idil,</p>
+    <p>thanks for the quick reply. I'd be available on Tuesday or
+      Wednesday next week, any time between 8:30 and 15:30.</p>
+    <p>I have indeed run only the original repo so far, but have
+      investigated some newer repositories as well just for fun.Â Are you
+      planning on providing one for DecoGS?<br>
+      Also, I have access to moderate GPU power here, dual 3060s with
+      12GB VRAM each. But I could get more recent hardware through the
+      university or other means.</p>
+    <p>I'll have a look at the papers you provided, I've heard of QUEEN
+      before.Â </p>
+    <p>Looking forward to talking to you next week!</p>
+    <p>Best,<br>
+      Sebastian</p>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 23.09.2026 11:51, Idil Sulo wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:A1BD981D-584B-4E52-A1AF-517B4C3341D6@gmail.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      Hi Sebastian,
+      <div><br>
+      </div>
+      <div>Thanks for reaching out! I went through your draft, it seems
+        like you were indeed moving towards the same direction.</div>
+      <div><br>
+      </div>
+      <div>This is the nature of research, and there is a lot of
+        concurrent work. Still, we work on open-ended problems so
+        nothing is yet completely final. There are a few topics
+        following this work already. I could guide you for the thesis
+        for a possible publication if this sounds interesting.</div>
+      <div><br>
+      </div>
+      <div>Dropping a few papers to discuss further:</div>
+      <div><br>
+      </div>
+      <div>Queen for dynamic static separation (via residuals here):Â <a
+          href="https://arxiv.org/pdf/2412.04469" moz-do-not-send="true"
+          class="moz-txt-link-freetext">https://arxiv.org/pdf/2412.04469</a></div>
+      <div>MoRGS for motion masking:Â <a
+          href="https://arxiv.org/pdf/2603.25042" moz-do-not-send="true"
+          class="moz-txt-link-freetext">https://arxiv.org/pdf/2603.25042</a></div>
+      <div>4DGC for Gaussian compression (to optimize storage costs):Â <a
+          href="https://arxiv.org/pdf/2503.18421" moz-do-not-send="true"
+          class="moz-txt-link-freetext">https://arxiv.org/pdf/2503.18421</a></div>
+      <div><br>
+      </div>
+      <div>Were you able to run anything regarding Gaussian Splatting
+        (perhaps the original repo) so far? Do you have the hardware
+        (GPU) to work on it?</div>
+      <div><br>
+      </div>
+      <div>I am blocked by another paper submission until the end of
+        this week, but Iâ€™d be happy to follow up with you next week. Let
+        me know about your availability.</div>
+      <div><br>
+      </div>
+      <div>Best,</div>
+      <div>Idil</div>
+      <div><br>
+      </div>
+      <div><br>
+        <div>
+          <blockquote type="cite">
+            <div>On 22. Sep 2026, at 14:37, Sebastian Frehmel
+              <a class="moz-txt-link-rfc2396E" href="mailto:sebastian@frehmel.de">&lt;sebastian@frehmel.de&gt;</a> wrote:</div>
+            <br class="Apple-interchange-newline">
+            <div>
+              <div>Hi Idil,<br>
+                <br>
+                my name is Sebastian, I am a Master's student in Data
+                Science at FernuniversitÃ¤t Hagen. It's my second degree
+                after a Diplom in Computer Science from KIT.<br>
+                <br>
+                Earlier today I found the DecoGS paper on arxiv and have
+                now realized that my entire idea for the Master Thesis
+                that is to start mid-November has been shattered :-)
+                Yes, I had the exact same idea and the proposal I wanted
+                to turn in this week for approval by my professor
+                features virtually the same concepts as DecoGS.<br>
+                Well, that's science, especially in a field like 3DGS.
+                I'm actually happy that I had a viable idea and that it
+                would indeed have worked.<br>
+                <br>
+                I am writing to send my honest and sincere
+                congratulations! I hope for a publication somewhere with
+                an impact the paper deserves.<br>
+                <br>
+                That said, I'd be very happy if we could have a chat.
+                Maybe there's material from your research on DecoGS
+                that's suitable to turn into a Master Thesis as a
+                follow-up or you have other ideas or pointers for me.
+                I'd appreciate that a lot.<br>
+                <br>
+                (I've attached my now obsolete proposal. Chapters 1
+                (informal introduction) and 3 (formal problem
+                description, unfinished) should quickly show you that I
+                was heading in the same direction.)<br>
+                <br>
+                Kind regards from Berlin<br>
+                Sebastian<br>
+                <span id="cid:153A5D49-7C88-4BE2-B73F-CC4E4ABB245C">&lt;proposal_masterthesis_frehmel.pdf&gt;</span></div>
+            </div>
+          </blockquote>
+        </div>
+        <br>
+      </div>
+    </blockquote>
+  </body>
+</html>
+
+--------------n6A4AIkrWQ3z4ghp8GY625Ag--

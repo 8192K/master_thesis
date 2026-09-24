@@ -1,0 +1,259 @@
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-Path: <idilsulo@gmail.com>
+Delivered-To: sebastian@frehmel.de
+Received: from mailcow.sebastianfrehmel.de ([172.22.1.253])
+	by 8b551a12dc41 with LMTP
+	id gM5HBSChs2p6bgMA7wnnJA
+	(envelope-from <idilsulo@gmail.com>)
+	for <sebastian@frehmel.de>; Wed, 23 Sep 2026 11:51:28 +0200
+X-Original-To: sebastian@frehmel.de
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (secp384r1) server-digest SHA384)
+	(No client certificate requested)
+	by mailcow.sebastianfrehmel.de (Postcow) with ESMTPS id 3DC021AB0E0
+	for <sebastian@frehmel.de>; Wed, 23 Sep 2026 11:51:26 +0200 (CEST)
+Authentication-Results: mailcow.sebastianfrehmel.de;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=Wln3mWFO;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (mailcow.sebastianfrehmel.de: domain of idilsulo@gmail.com designates 74.125.225.76 as permitted sender) smtp.mailfrom=idilsulo@gmail.com
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=frehmel.de;
+	s=dkim; t=1790157086;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=OEuWoVxFg6+HDFzVh06R3oNdWfga6lS9gizV4uc6vuw=;
+	b=MMxik3HdX9ukk8pdHSPPf2iS3gZI8q1/bw9l3Jpv2MSIyFsXJpuIBNfN7i8wJl5NwsUKSx
+	fqWBne3b9K4RKBk7Mrtw+HgBwYTcox/LIxh2mc2YiWO8iQN8Cnp3loAecfyYQeEk5tgjlb
+	E0Sxn22Z5uzMBOQhs475zIPntxGJSsU1UjGJfIgYcVE4FHgB0ghpMDtlOvuv5Lbj5ntVRv
+	Fhsv5qfj1jpakwx8bFaOa/mWBmRzpEjjmrCH5/CCUxY4T6+e6m/+twQHGrvIwBNEGueTE0
+	74G+x9NFyQoHs3bbjc4Z18kXRiA/XOMsJ+OR95u2QzZS3iP1l5vC/efkl1nD1Q==
+ARC-Seal: i=1; a=rsa-sha256; d=frehmel.de; s=dkim; cv=none; t=1790157086;
+	b=Nx2mKxntgII4wA38XN85FNwvfBOujiKdiU6dqoPDnEyPoOJnmtklBdp0cc9eXEFTkKRckx
+	2sHfVfY5V8/mbrdaBWP1i3Ruon6tBmCKHw1lb5hoZOU3gAK2fnFWdf2Yda4X1FN46vkDYd
+	pdNy5bS8V/Hdmks1bHLag7rILOyBZvI7yksuK3scjKS3WVWptpv+pAJs//I5qRB6WHSQ6s
+	dj3UF1kleuBIQOtpEuBYyq1QcCEC031GM4bfl2Kh1nkNLR4sARC/wx3Jd2E16ZOfEkuKsI
+	zx8UXi6Bfqwg7tmNqjArzICXwi1tB4N3+WMTtNTGLtF0n4rGcWq1qdJ68iS8dA==
+ARC-Authentication-Results: i=1;
+	mailcow.sebastianfrehmel.de;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=Wln3mWFO;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (mailcow.sebastianfrehmel.de: domain of idilsulo@gmail.com designates 74.125.225.76 as permitted sender) smtp.mailfrom=idilsulo@gmail.com
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4843f22dc83so570748f8f.1
+        for <sebastian@frehmel.de>; Wed, 23 Sep 2026 02:51:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790157084; x=1790761884; darn=frehmel.de;
+        h=message-id:in-reply-to:to:references:date:subject:mime-version
+         :content-type:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=OEuWoVxFg6+HDFzVh06R3oNdWfga6lS9gizV4uc6vuw=;
+        b=Wln3mWFO2YP0XonoJHqJBK4DhPa+6Q1VTcmh3nEn4b/MQqL8vqqCTOqf40TYXvTSvW
+         W/dQRffZbvnMR9gFGs+wSYHaywWHj0sIZH0Me/4H2a65ns5HRYDdNRiff3hsSq8JSGGl
+         S2Yd8VX5XWaLdcHBmiIi6kY9/TPFeDrGIoQIKZe3PPwSGTq3aW0fAzaunuIsFeuuimXY
+         8SIKJTuTR+QzicfFMxpYtL66iofmkkfGsEkbpCNvchGiF8jAoBEYz4EVSUJVxQI9r01a
+         coxKS1LYBrj7UQaObPrCMZePTPRWOs8F4COL5Mx9SMASdwPyuuTHXrl3iHgEjcP5PWoA
+         RUUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790157084; x=1790761884;
+        h=message-id:in-reply-to:to:references:date:subject:mime-version
+         :content-type:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=OEuWoVxFg6+HDFzVh06R3oNdWfga6lS9gizV4uc6vuw=;
+        b=jY+JYP1OnB8dhPhFsgODzLy6nccQ5cA+OGUWYa48dd0HLvzTqig43KUaFQXlewsAaG
+         JUFiUXxVcE6ZrMx2l7maj409WnT6aOGXnI0S1qoRczRnqMVNWT2abYtO94Je/UF92CJE
+         uocH6puM9KzrzbLHGT/6p1JZI1byXkmM/d8zyOl6X28jDR8xVDL2x85H9u84wySI/Qdp
+         R1qGFbWpx3dv6NTpM7++GAsRpjnhxV1IEwxwhSczMATOgdTtrdFoBVj7MQ0X6IGIbE0o
+         xzNkzzGsqky84YIXFqSlkeL86A8LoFa1WFxFL3nvCgf7P8uqVgbzCV5VAmzp/Y7oK/I0
+         f3qg==
+X-Gm-Message-State: AFuF++mQdjs9k9IitEpwjo9hjltceEpK2ZE3dARf8zxau9u9e4cPx1uX
+	85+0UI+I5VUESgfcqdWdD6c60pqc6pwe0altnRVQMLMjRm64S+uFpr8yUEDGTQ==
+X-Gm-Gg: AYBFou1rqYggEmLNPKjFpuH2uTrKTsoGV9pM2S47uncvVgdAkr7YeXiiqlfIWQRoZpe
+	BGeXzG7w2zqu8zLAawd/QLG9R9u0HEWMAyCFQ6mvSp0Tso+iv7Z8n6ZEpU43ONtfi8lbKFqcsqF
+	dB7Vl1s0FXbmU+/X+vLd2RL2OIWBD+KKL3bGAtgcaYaTi4XzrdUvytHbvNElrZja/zf3cMupWBd
+	eKQ7HZ2H8XQSQ9chtsejaVCc1slLhxDCXAGgJSQF4Nw7N4K6pFV3z4QBeUUZryYq7oNMqCs/g0Y
+	dvchJ43staaIIZC7FhT74S1Haj7WQP84PKeTfAOG0P3DThMR2hbClZRM02veRrtMildKS5oSkN/
+	p1DITdGhu6YfgaaiB/4rC83vCS0N8lJj4cLtcEve9p30Ym8BF3faHtolbW+DGLCQiZ1D5pdG2JZ
+	5RSxQo7xBmkL42D4uBZoFd07WLF8cVQ1wdzz+dPQkAdo24wMb8hqny0QvhG+mc8vJ2Q/uvgwh5c
+	Zsd9Mw/gwElxTONDsGhFmk=
+X-Received: by 2002:a05:6000:2f88:b0:486:f980:2361 with SMTP id ffacd0b85a97d-4886709c9abmr3362624f8f.45.1790157084391;
+        Wed, 23 Sep 2026 02:51:24 -0700 (PDT)
+Received: from smtpclient.apple ([2a03:fc82:284:4a00:6493:900d:469f:8950])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4886877a19bsm6232991f8f.25.2026.09.23.02.51.23
+        for <sebastian@frehmel.de>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 23 Sep 2026 02:51:23 -0700 (PDT)
+From: Idil Sulo <idilsulo@gmail.com>
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_57E18092-E88C-44B6-BA66-1E8B7BE8CB97"
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
+Subject: Re: DecoGS
+Date: Wed, 23 Sep 2026 11:51:12 +0200
+References: <06ee9c2b-3c99-4692-b002-b6219eb120a3@frehmel.de>
+To: Sebastian Frehmel <sebastian@frehmel.de>
+In-Reply-To: <06ee9c2b-3c99-4692-b002-b6219eb120a3@frehmel.de>
+Message-Id: <A1BD981D-584B-4E52-A1AF-517B4C3341D6@gmail.com>
+X-Mailer: Apple Mail (2.3826.700.81)
+X-Last-TLS-Session-Version: TLSv1.3
+X-Rspamd-Queue-Id: 3DC021AB0E0
+X-Spamd-Result: default: False [-0.24 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.62)[94.91%];
+	RBL_SENDERSCORE_REPUT_1(3.50)[74.125.225.76:from];
+	INTRODUCTION(2.00)[];
+	BAD_REP_POLICIES(2.00)[];
+	MIME_GOOD(-0.10)[multipart/alternative,text/plain];
+	MX_GOOD(-0.01)[];
+	IP_REPUTATION_HAM(-0.01)[asn: 15169(0.00), country: US(-0.01), ip: 74.125.225.76(0.00)];
+	RCPT_MAILCOW_DOMAIN(0.00)[frehmel.de];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_SIGNED(0.00)[frehmel.de:s=dkim:i=1];
+	TO_DN_ALL(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
+	R_DKIM_ALLOW(0.00)[gmail.com:s=20251104];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[gmail.com,none];
+	PREVIOUSLY_DELIVERED(0.00)[sebastian@frehmel.de];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_IN_DNSWL_NONE(0.00)[74.125.225.76:from];
+	APPLE_MAILER_COMMON(0.00)[];
+	R_SPF_ALLOW(0.00)[+ip4:74.125.0.0/16];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[74.125.225.76:from];
+	ASN(0.00)[asn:15169, ipnet:74.125.225.0/24, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DWL_DNSWL_NONE(0.00)[gmail.com:dkim]
+
+
+--Apple-Mail=_57E18092-E88C-44B6-BA66-1E8B7BE8CB97
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+Hi Sebastian,
+
+Thanks for reaching out! I went through your draft, it seems like you =
+were indeed moving towards the same direction.
+
+This is the nature of research, and there is a lot of concurrent work. =
+Still, we work on open-ended problems so nothing is yet completely =
+final. There are a few topics following this work already. I could guide =
+you for the thesis for a possible publication if this sounds =
+interesting.
+
+Dropping a few papers to discuss further:
+
+Queen for dynamic static separation (via residuals here): =
+https://arxiv.org/pdf/2412.04469
+MoRGS for motion masking: https://arxiv.org/pdf/2603.25042
+4DGC for Gaussian compression (to optimize storage costs): =
+https://arxiv.org/pdf/2503.18421
+
+Were you able to run anything regarding Gaussian Splatting (perhaps the =
+original repo) so far? Do you have the hardware (GPU) to work on it?
+
+I am blocked by another paper submission until the end of this week, but =
+I=E2=80=99d be happy to follow up with you next week. Let me know about =
+your availability.
+
+Best,
+Idil
+
+
+> On 22. Sep 2026, at 14:37, Sebastian Frehmel <sebastian@frehmel.de> =
+wrote:
+>=20
+> Hi Idil,
+>=20
+> my name is Sebastian, I am a Master's student in Data Science at =
+Fernuniversit=C3=A4t Hagen. It's my second degree after a Diplom in =
+Computer Science from KIT.
+>=20
+> Earlier today I found the DecoGS paper on arxiv and have now realized =
+that my entire idea for the Master Thesis that is to start mid-November =
+has been shattered :-) Yes, I had the exact same idea and the proposal I =
+wanted to turn in this week for approval by my professor features =
+virtually the same concepts as DecoGS.
+> Well, that's science, especially in a field like 3DGS. I'm actually =
+happy that I had a viable idea and that it would indeed have worked.
+>=20
+> I am writing to send my honest and sincere congratulations! I hope for =
+a publication somewhere with an impact the paper deserves.
+>=20
+> That said, I'd be very happy if we could have a chat. Maybe there's =
+material from your research on DecoGS that's suitable to turn into a =
+Master Thesis as a follow-up or you have other ideas or pointers for me. =
+I'd appreciate that a lot.
+>=20
+> (I've attached my now obsolete proposal. Chapters 1 (informal =
+introduction) and 3 (formal problem description, unfinished) should =
+quickly show you that I was heading in the same direction.)
+>=20
+> Kind regards from Berlin
+> Sebastian
+> <proposal_masterthesis_frehmel.pdf>
+
+
+--Apple-Mail=_57E18092-E88C-44B6-BA66-1E8B7BE8CB97
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; =
+charset=3Dutf-8"></head><body style=3D"overflow-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;">Hi =
+Sebastian,<div><br></div><div>Thanks for reaching out! I went through =
+your draft, it seems like you were indeed moving towards the same =
+direction.</div><div><br></div><div>This is the nature of research, and =
+there is a lot of concurrent work. Still, we work on open-ended problems =
+so nothing is yet completely final. There are a few topics following =
+this work already. I could guide you for the thesis for a possible =
+publication if this sounds =
+interesting.</div><div><br></div><div>Dropping a few papers to discuss =
+further:</div><div><br></div><div>Queen for dynamic static separation =
+(via residuals here):&nbsp;<a =
+href=3D"https://arxiv.org/pdf/2412.04469">https://arxiv.org/pdf/2412.04469=
+</a></div><div>MoRGS for motion masking:&nbsp;<a =
+href=3D"https://arxiv.org/pdf/2603.25042">https://arxiv.org/pdf/2603.25042=
+</a></div><div>4DGC for Gaussian compression (to optimize storage =
+costs):&nbsp;<a =
+href=3D"https://arxiv.org/pdf/2503.18421">https://arxiv.org/pdf/2503.18421=
+</a></div><div><br></div><div>Were you able to run anything regarding =
+Gaussian Splatting (perhaps the original repo) so far? Do you have the =
+hardware (GPU) to work on it?</div><div><br></div><div>I am blocked by =
+another paper submission until the end of this week, but I=E2=80=99d be =
+happy to follow up with you next week. Let me know about your =
+availability.</div><div><br></div><div>Best,</div><div>Idil</div><div><br>=
+</div><div><br><div><blockquote type=3D"cite"><div>On 22. Sep 2026, at =
+14:37, Sebastian Frehmel &lt;sebastian@frehmel.de&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div><div>Hi Idil,<br><br>my name is =
+Sebastian, I am a Master's student in Data Science at Fernuniversit=C3=A4t=
+ Hagen. It's my second degree after a Diplom in Computer Science from =
+KIT.<br><br>Earlier today I found the DecoGS paper on arxiv and have now =
+realized that my entire idea for the Master Thesis that is to start =
+mid-November has been shattered :-) Yes, I had the exact same idea and =
+the proposal I wanted to turn in this week for approval by my professor =
+features virtually the same concepts as DecoGS.<br>Well, that's science, =
+especially in a field like 3DGS. I'm actually happy that I had a viable =
+idea and that it would indeed have worked.<br><br>I am writing to send =
+my honest and sincere congratulations! I hope for a publication =
+somewhere with an impact the paper deserves.<br><br>That said, I'd be =
+very happy if we could have a chat. Maybe there's material from your =
+research on DecoGS that's suitable to turn into a Master Thesis as a =
+follow-up or you have other ideas or pointers for me. I'd appreciate =
+that a lot.<br><br>(I've attached my now obsolete proposal. Chapters 1 =
+(informal introduction) and 3 (formal problem description, unfinished) =
+should quickly show you that I was heading in the same =
+direction.)<br><br>Kind regards from Berlin<br>Sebastian<br><span =
+id=3D"cid:153A5D49-7C88-4BE2-B73F-CC4E4ABB245C">&lt;proposal_masterthesis_=
+frehmel.pdf&gt;</span></div></div></blockquote></div><br></div></body></ht=
+ml>=
+
+--Apple-Mail=_57E18092-E88C-44B6-BA66-1E8B7BE8CB97--
